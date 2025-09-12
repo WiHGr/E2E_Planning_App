@@ -1,8 +1,8 @@
 {
   "name": "PlanningApp",
   "version": "1.0.0",
-  "description": "A simple CAP project.",
-  "repository": "<Add your repository here>",
+  "description": "A simple CAP project with SAPUI5 SmartTable app.",
+  "repository": "<deine-github-url-oder-leer>",
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
@@ -23,11 +23,20 @@
     "start": "cds-serve"
   },
   "sapux": [
-    "app/admin-books",
-    "app/browse"
+    "app/plan-ui",
+    "app/browse"             
   ],
   "cds": {
     "requires": {
+      "db": {
+        "kind": "hana"        
+      },
+      "[development]": {
+        "db": {
+          "kind": "sqlite",    
+          "model": ["db", "srv"]
+        }
+      },
       "[production]": {
         "auth": "xsuaa"
       },
@@ -37,3 +46,4 @@
     }
   }
 }
+
