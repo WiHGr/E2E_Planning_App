@@ -1,0 +1,3 @@
+ID,year,month,product,plant,plannedQty,unit,version,changedBy,changedAt
+"2b3c4d",2025,9,"ProductA","Plant1",10000,"ST",1,"demo_user","2025-09-12T10:00:00Z"
+"2b3c4e",2025,10,"ProductB","Plant2",20000,"KG",1,"demo_user","2025-09-12T10:00:00Z"
