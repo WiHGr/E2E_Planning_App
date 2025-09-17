@@ -2,15 +2,18 @@ _schema-version: 3.3.0
 ID: PlanningApp
 version: 1.0.0
 description: "A simple CAP project."
+
 parameters:
   enable-parallel-deployments: true
   deploy_mode: html5-repo
+
 build-parameters:
   before-all:
     - builder: custom
       commands:
         - npm install
         - npx cds build --production
+
 modules:
   - name: PlanningApp-srv
     type: nodejs
@@ -21,7 +24,7 @@ modules:
     build-parameters:
       builder: npm-ci
     provides:
-      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+      - name: srv-api
         properties:
           srv-url: ${default-url}
     requires:
@@ -38,6 +41,7 @@ modules:
     requires:
       - name: PlanningApp-db
 
+
   - name: PlanningApp
     type: approuter.nodejs
     path: app/router
@@ -49,7 +53,7 @@ modules:
       - name: srv-api
         group: destinations
         properties:
-          name: srv-api # must be used in xs-app.json as well
+          name: srv-api
           url: ~{srv-url}
           forwardAuthToken: true
       - name: PlanningApp-auth
@@ -75,13 +79,9 @@ modules:
     build-parameters:
       build-result: app/
       requires:
-        - name: PlanningAppadminbooks
+        - name: PlanningAppsapui5app
           artifacts:
-            - admin-books.zip
-          target-path: app/
-        - name: PlanningAppbrowse
-          artifacts:
-            - browse.zip
+            - sapui5-app.zip
           target-path: app/
     parameters:
       config:
@@ -103,28 +103,16 @@ modules:
                 Type: HTTP
                 ProxyType: Internet
 
-  - name: PlanningAppadminbooks
+  - name: PlanningAppsapui5app
     type: html5
-    path: app/admin-books
+    path: app/sapui5-app
     build-parameters:
       build-result: dist
       builder: custom
       commands:
         - npm install
         - npm run build
-      supported-platforms:
-        []
-  - name: PlanningAppbrowse
-    type: html5
-    path: app/browse
-    build-parameters:
-      build-result: dist
-      builder: custom
-      commands:
-        - npm install
-        - npm run build
-      supported-platforms:
-        []
+      supported-platforms: []
 
 resources:
   - name: PlanningApp-auth
@@ -146,16 +134,19 @@ resources:
             - https://*~{app-api/app-uri}/**
     requires:
       - name: app-api
+
   - name: PlanningApp-db
     type: com.sap.xs.hdi-container
     parameters:
       service: hana
       service-plan: hdi-shared
+
   - name: PlanningApp-connectivity
     type: org.cloudfoundry.managed-service
     parameters:
       service: connectivity
       service-plan: lite
+
   - name: PlanningApp-destination
     type: org.cloudfoundry.managed-service
     parameters:
@@ -167,6 +158,7 @@ resources:
     parameters:
       service: html5-apps-repo
       service-plan: app-host
+
   - name: PlanningApp-html5-runtime
     type: org.cloudfoundry.managed-service
     parameters:

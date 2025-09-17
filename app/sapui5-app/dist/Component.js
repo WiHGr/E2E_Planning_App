@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/UIComponent","sap/ui/model/odata/v2/ODataModel"],function(t,n){"use strict";return t.extend("sapui5-app.Component",{metadata:{manifest:"json"},init:function(){t.prototype.init.apply(this,arguments)}})});
+//# sourceMappingURL=Component.js.map

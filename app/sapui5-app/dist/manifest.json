@@ -1,0 +1,54 @@
+{
+  "sap.app": {
+    "id": "sapui5-app",
+    "type": "application",
+    "title": "Planning App",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/catalog/", 
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "sapui5-app.view.Main",
+      "type": "XML",
+      "async": true,
+      "id": "mainView"
+    },
+    "dependencies": {
+      "minUI5Version": "1.108.0",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {}
+      }
+    },
+    "models": {
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizeRequests": true
+        },
+        "type": "sap.ui.model.odata.v2.ODataModel"
+      }
+    }
+  }
+}

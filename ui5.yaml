@@ -1,0 +1,25 @@
+specVersion: '3.0'
+metadata:
+  name: sapui5-app
+type: application
+resources:
+  configuration:
+    paths:
+      webapp: app/sapui5-app/webapp
+framework:
+  name: SAPUI5
+  version: 1.120.0
+  libraries:
+    - name: sap.ui.core
+    - name: sap.m
+    - name: sap.ui.table
+    - name: sap.ui.comp
+    - name: sap.ui.generic.app
+    - name: sap.fe.templates
+server:
+  customMiddleware:
+    - name: ui5-middleware-simpleproxy
+      afterMiddleware: compression
+      configuration:
+        baseUri: 'https://port33317-workspaces-ws-iwtpy.us10.trial.applicationstudio.cloud.sap/odata/v2/catalog/PlanningData'
+        mountPath: /catalog/

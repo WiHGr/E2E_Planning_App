@@ -1,0 +1,30 @@
+<mvc:View
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:smartTable="sap.ui.comp.smarttable"
+  xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+  controllerName="sapui5-app.controller.Main">
+
+  <VBox class="sapUiSmallMargin">
+
+    <smartFilterBar:SmartFilterBar
+    id="smartFilterBar"
+    entitySet="PlanningData"
+    useToolbar="true"
+    liveMode="true" />
+
+    <smartTable:SmartTable
+      id="smartTable"
+      entitySet="PlanData"
+      tableType="Table"
+      useVariantManagement="false"
+      useExportToExcel="true"
+      useTablePersonalisation="true"
+      header="Plan Data"
+      enableAutoBinding="true"
+      smartFilterId="smartFilterBar">
+    </smartTable:SmartTable>
+  
+  
+  </VBox>
+</mvc:View>
